@@ -45,6 +45,8 @@ def continuous_match_history(account_id=None, fetch_delay=1,
                     # 2nd fetch onwards, ignore the first common match
                     match_history.extend(cur_response['result']['matches'][1:])
                     matches_fetched += cur_response['result']['num_results'] - 1
+            else:
+                break
             last_match_id = cur_response['result']['matches'][-1]['match_id']
         print("Matches fetched - #{}...".format(matches_fetched))
         wait_for_next_fetch(fetch_delay)
