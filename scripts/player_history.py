@@ -46,4 +46,5 @@ def continuous_match_history(account_id=None, fetch_delay=1,
                     matches_fetched += cur_response['result']['num_results'] - 1
             last_match_id = cur_response['result']['matches'][-1]['match_id']
         wait_for_next_fetch(fetch_delay)
-    return last_response_status, last_response_detail, match_history
+    return {'status':last_response_status, 'statusDetail':last_response_detail,
+            'matches':match_history}
