@@ -2,6 +2,7 @@
 Script to fetch latest matches history for a player
 """
 
+from __future__ import print_function
 from dota2py import api
 from time import sleep as wait_for_next_fetch
 
@@ -45,6 +46,8 @@ def continuous_match_history(account_id=None, fetch_delay=1,
                     match_history.extend(cur_response['result']['matches'][1:])
                     matches_fetched += cur_response['result']['num_results'] - 1
             last_match_id = cur_response['result']['matches'][-1]['match_id']
+        print("Matches fetched - #{}...".format(matches_fetched))
         wait_for_next_fetch(fetch_delay)
+    print("{0}: {1}".format(last_response_status, last_response_detail))
     return {'status':last_response_status, 'statusDetail':last_response_detail,
             'matches':match_history}
