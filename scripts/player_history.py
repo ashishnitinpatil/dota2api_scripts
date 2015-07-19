@@ -13,9 +13,6 @@ def get_player_history(account_id=None, fetch_delay=1,
     Rate limits the API requests according to `fetch_delay` (in seconds)
     Output : last_response_status, last_response_detail, match_history
     """
-    # sanity checks
-    assert isinstance(account_id, int) or isinstance(account_id, long)
-    assert matches_requested >= 0
 
     # tracking variables
     matches_fetched = 0
