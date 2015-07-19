@@ -36,8 +36,14 @@ def continuous_match_history(account_id=None, fetch_delay=1,
         else:
             # successful data fetch
             if cur_response['result']['num_results'] > 1:
-                match_history.extend(cur_response['result']['matches'][1:])
-                matches_fetched += cur_response['result']['num_results'] - 1
+                if not match_history:
+                    # very first fetch
+                    match_history.extend(cur_response['result']['matches'])
+                    matches_fetched += cur_response['result']['num_results']
+                else:
+                    # 2nd fetch onwards, ignore the first common match
+                    match_history.extend(cur_response['result']['matches'][1:])
+                    matches_fetched += cur_response['result']['num_results'] - 1
             last_match_id = cur_response['result']['matches'][-1]['match_id']
         wait_for_next_fetch(fetch_delay)
     return last_response_status, last_response_detail, match_history
