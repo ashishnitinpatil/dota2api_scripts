@@ -17,14 +17,14 @@ def public_match_history(start_at_match_seq_num=None, fetch_delay=1,
 
     # tracking variables
     matches_fetched = 0
-    last_match_id = start_at_match_seq_num
+    last_match_seq_num = start_at_match_seq_num
     last_response_status = 1
     match_history = []
     last_response_detail = "Fetch successful"
 
     while last_response_status == 1 and matches_fetched < matches_requested:
         cur_response = api.get_match_history_by_sequence_num(
-            start_at_match_seq_num=last_match_id, **kwargs
+            start_at_match_seq_num=last_match_seq_num, **kwargs
         )
         last_response_status = cur_response['result']['status']
         if not last_response_status == 1:
@@ -47,7 +47,7 @@ def public_match_history(start_at_match_seq_num=None, fetch_delay=1,
                     matches_fetched += len(cur_response['result']['matches']) - 1
             else:
                 break
-            last_match_id = cur_response['result']['matches'][-1]['match_id']
+            last_match_seq_num = cur_response['result']['matches'][-1]['match_seq_num']
         print("Matches fetched - #{}...".format(matches_fetched))
         wait_for_next_fetch(fetch_delay)
     print("{0}: {1}".format(last_response_status, last_response_detail))
