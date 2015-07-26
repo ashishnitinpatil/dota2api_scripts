@@ -6,9 +6,8 @@ from __future__ import print_function
 from dota2py import api
 from time import sleep as wait_for_next_fetch
 
-def player_match_history(account_id=None, fetch_delay=1,
-                         matches_requested=500, skill=0,
-                         start_at_match_id=None, **kwargs):
+def latest_matches(account_id=None, fetch_delay=1, matches_requested=500,
+                   skill=0, start_at_match_id=None, **kwargs):
     """
     Returns data for most recent matches according to given kwargs
     Rate limits the API requests according to `fetch_delay` (in seconds)
