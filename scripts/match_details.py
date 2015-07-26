@@ -6,7 +6,7 @@ from __future__ import print_function
 from dota2py import api
 from time import sleep as wait_for_next_fetch
 
-def match_details(match_ids=[], fetch_delay=0.2, **kwargs):
+def match_details(match_ids=[], fetch_delay=0.2, debug=True, **kwargs):
     """
     Returns data for the requested match ids
     Rate limits the API requests according to `fetch_delay` (in seconds)
@@ -21,14 +21,13 @@ def match_details(match_ids=[], fetch_delay=0.2, **kwargs):
         if not 'match_id' in cur_response['result']:
             # unsuccessful query
             times_failed += 1
-            if not 'statusDetail' in cur_response['result']:
-                print("Match id", match_id, ": Unknown error")
-            else:
-                print("Match id", match_id, ":", cur_response['result']['statusDetail'])
+            if debug:
+                print("Match id", match_id, ":", "Unsuccessful fetch / bad id")
         else:
             # successful data fetch
             all_details[match_id] = cur_response['result']
         wait_for_next_fetch(fetch_delay)
-    print("Matches fetched = #", len(all_details), sep="")
-    print("Unsuccessful fetches - #", times_failed, sep="")
+    if debug:
+        print("Matches fetched = #", len(all_details), sep="")
+        print("Unsuccessful fetches - #", times_failed, sep="")
     return all_details

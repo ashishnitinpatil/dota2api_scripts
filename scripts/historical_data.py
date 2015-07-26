@@ -7,9 +7,8 @@ from __future__ import print_function
 from dota2py import api
 from time import sleep as wait_for_next_fetch
 
-def public_match_history(start_at_match_seq_num=None, fetch_delay=1,
-                         matches_requested=10**5,
-                         **kwargs):
+def public_match_history(start_at_match_seq_num=None, matches_requested=500,
+                         fetch_delay=1, debug=True, **kwargs):
     """
     Returns list of most recent public matches according to given kwargs
     Rate limits the API requests according to `fetch_delay` (in seconds)
@@ -49,8 +48,10 @@ def public_match_history(start_at_match_seq_num=None, fetch_delay=1,
             else:
                 break
             last_match_seq_num = cur_response['result']['matches'][-1]['match_seq_num']
-        print("Matches fetched - #{}...".format(matches_fetched))
+        if debug:
+            print("Matches fetched - #{}...".format(matches_fetched))
         wait_for_next_fetch(fetch_delay)
-    print("{0}: {1}".format(last_response_status, last_response_detail))
+    if debug:
+        print("{0}: {1}".format(last_response_status, last_response_detail))
     return {'status':last_response_status, 'statusDetail':last_response_detail,
             'matches':match_history}
