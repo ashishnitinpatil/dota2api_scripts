@@ -1,5 +1,6 @@
 """
-Script to fetch historical data (since 2011) for matches (global, public)
+Script to fetch historical data (since 2011) for matches (global, public).
+Gives results in a chronological order (ascending), as they happened.
 """
 
 from __future__ import print_function

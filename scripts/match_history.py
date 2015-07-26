@@ -1,5 +1,5 @@
 """
-Script to fetch data for latest matches
+Script to fetch data for latest matches (reverse chronological order).
 """
 
 from __future__ import print_function
