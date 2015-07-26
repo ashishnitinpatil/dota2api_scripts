@@ -53,13 +53,3 @@ def public_match_history(start_at_match_seq_num=None, fetch_delay=1,
     print("{0}: {1}".format(last_response_status, last_response_detail))
     return {'status':last_response_status, 'statusDetail':last_response_detail,
             'matches':match_history}
-
-DOTA2_API_KEY = "06A0619C384CFA31B4D956A805743BEF"
-api.set_api_key(DOTA2_API_KEY)
-#api.use_test_api()
-
-#account_id = int(api.get_steam_id("shad0w_wa1k3r")["response"]["steamid"])
-
-#print account_id
-
-x = public_match_history(start_at_match_seq_num=None, matches_requested=1000, fetch_delay=1)
