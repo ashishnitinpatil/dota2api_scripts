@@ -1,5 +1,5 @@
 """
-Script to fetch latest matches history for a player
+Script to fetch data for latest matches
 """
 
 from __future__ import print_function
@@ -10,7 +10,7 @@ def player_match_history(account_id=None, fetch_delay=1,
                          matches_requested=500, skill=0,
                          start_at_match_id=None, **kwargs):
     """
-    Returns list of most recent matches according to given kwargs
+    Returns data for most recent matches according to given kwargs
     Rate limits the API requests according to `fetch_delay` (in seconds)
     Output : last_response_status, last_response_detail, match_history
     """

@@ -1,5 +1,5 @@
 """
-Script to fetch history for the latest matches (global, public)
+Script to fetch historical data (since 2011) for matches (global, public)
 """
 
 from __future__ import print_function
