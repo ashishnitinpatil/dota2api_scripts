@@ -8,7 +8,7 @@ from time import sleep as wait_for_next_fetch
 
 def player_match_history(account_id=None, fetch_delay=1,
                          matches_requested=500, skill=0,
-                         **kwargs):
+                         start_at_match_id=None, **kwargs):
     """
     Returns list of most recent matches according to given kwargs
     Rate limits the API requests according to `fetch_delay` (in seconds)
@@ -17,7 +17,7 @@ def player_match_history(account_id=None, fetch_delay=1,
 
     # tracking variables
     matches_fetched = 0
-    last_match_id = None
+    last_match_id = start_at_match_id
     last_response_status = 1
     match_history = []
     last_response_detail = "Fetch successful"
