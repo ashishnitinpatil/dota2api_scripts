@@ -16,16 +16,18 @@ def match_details(match_ids=[], fetch_delay=0.2, debug=True, **kwargs):
     all_details = dict()
     times_failed = 0
 
-    for match_id in match_ids:
+    for i, match_id in enumerate(match_ids):
         cur_response = api.get_match_details(match_id=match_id, **kwargs)
         if not 'match_id' in cur_response['result']:
             # unsuccessful query
             times_failed += 1
             if debug:
-                print("Match id", match_id, ":", "Unsuccessful fetch / bad id")
+                print(i, "Match id", match_id, ":", "Unsuccessful fetch / bad id")
         else:
             # successful data fetch
             all_details[match_id] = cur_response['result']
+            if debug:
+                print(i, "Match id", match_id, ":", "Successful fetch")
         wait_for_next_fetch(fetch_delay)
     if debug:
         print("Matches fetched = #", len(all_details), sep="")
